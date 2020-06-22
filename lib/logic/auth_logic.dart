@@ -62,13 +62,13 @@ class LoginLogic extends ChangeNotifier{
     isAuthenticating = true;
     notifyListeners();
     try{
-      FirebaseUser user = await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: pass);
+      FirebaseUser user = (await FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: pass)) as FirebaseUser;
       print(user.uid);
       isAuthenticating = false;
       notifyListeners();
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MultiProvider(
         providers: [
-          ChangeNotifierProvider(builder: (_)=>SessionManagement(),)
+          ChangeNotifierProvider(create: (BuildContext context) =>SessionManagement() ,)
         ],
         child: SpotifyHome(),
       )), (Route<dynamic> route)=>false);
@@ -131,7 +131,7 @@ class CreateUserAccount extends ChangeNotifier{
     isCreatingAccount = true;
     notifyListeners();
     try{
-      FirebaseUser user = await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password);
+      FirebaseUser user = (await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password)) as FirebaseUser;
       print("Signed up as : "+user.uid);
       await Firestore.instance.collection("users").document(user.uid).setData({
         "name": name,
@@ -144,7 +144,7 @@ class CreateUserAccount extends ChangeNotifier{
       notifyListeners();
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MultiProvider(
         providers: [
-          ChangeNotifierProvider(builder: (_)=>SessionManagement(),)
+          ChangeNotifierProvider(create: (BuildContext context) =>SessionManagement()),
         ],
         child: SpotifyHome(),
       )), (Route<dynamic> route)=>false);
@@ -162,7 +162,6 @@ class CreateUserAccount extends ChangeNotifier{
   }
 
 }
-
 
 class ForgotPassword extends ChangeNotifier{
   String email;

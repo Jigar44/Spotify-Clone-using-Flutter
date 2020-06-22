@@ -7,7 +7,7 @@ class ShowCustomAlertDialog extends ChangeNotifier{
       context: context,
       builder: (context){
         return AlertDialog(
-          title: Text(message),
+          title: Text(message,  style: new TextStyle(color: Colors.white, fontWeight: FontWeight.w400)),
           actions: <Widget>[
             Center(
               child: RaisedButton(
@@ -15,7 +15,7 @@ class ShowCustomAlertDialog extends ChangeNotifier{
                 onPressed: (){
                   Navigator.pop(context);
                 },
-                child: Text("Okay!"),
+                child: Text("Okay!", style: new TextStyle(color: Colors.white)),
               ),
             ),
           ],

@@ -7,8 +7,8 @@ void main(){
     theme: ThemeData(
       fontFamily: 'Proxima Nova',
       brightness: Brightness.dark,
-      primaryColor: Colors.lightBlue[800],
-      accentColor: Colors.cyan[600],
+      primaryColor: Colors.green[900],
+      accentColor: Colors.lightGreen[800],
     ),
     debugShowCheckedModeBanner: false,
     home: SplashScreen(),
